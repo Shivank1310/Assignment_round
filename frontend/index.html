@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIPR - Landing Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-name {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .read-more-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .read-more-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Clients Section */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .client-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .client-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .client-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid #667eea;
+        }
+        
+        .client-description {
+            color: #7f8c8d;
+            font-style: italic;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .client-name {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+        
+        .client-designation {
+            color: #667eea;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Form */
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 4rem 0;
+            margin: 4rem 0;
+        }
+        
+        .contact-section .section-title {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .contact-section .section-title::after {
+            background: white;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: 600;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Newsletter Section */
+        .newsletter-section {
+            background: #f8f9fa;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .subscribe-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: 600;
+        }
+        
+        .subscribe-btn:hover {
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .success-message {
+            background: #4caf50;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .error-message {
+            background: #f44336;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Welcome to Our Company</h1>
+            <p>Building Tomorrow's Solutions Today</p>
+        </div>
+    </header>
+
+    <!-- Our Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Our Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Happy Clients Section -->
+    <section id="clients">
+        <div class="container">
+            <h2 class="section-title">Happy Clients</h2>
+            <div class="clients-grid" id="clientsGrid">
+                <!-- Clients will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="success-message" id="contactSuccess">Message sent successfully!</div>
+                <div class="error-message" id="contactError">Something went wrong. Please try again.</div>
+                
+                <div class="form-group">
+                    <label for="fullName">Full Name *</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mobile">Mobile Number *</label>
+                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section" id="newsletter">
+        <div class="container">
+            <h2 class="section-title">Subscribe to Our Newsletter</h2>
+            <p>Stay updated with our latest news and offers</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Enter your email address" required>
+                <button type="submit" class="subscribe-btn">Subscribe</button>
+            </form>
+            <div class="success-message" id="newsletterSuccess" style="max-width: 500px; margin: 1rem auto;">Subscribed successfully!</div>
+            <div class="error-message" id="newsletterError" style="max-width: 500px; margin: 1rem auto;">Something went wrong. Please try again.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Our Company. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Base URL - Change this to your backend URL
+        const API_URL = 'http://localhost:5000/api'; // Update this when you deploy
+
+        // Load Projects
+        async function loadProjects() {
+            try {
+                const response = await fetch(`${API_URL}/projects`);
+                const projects = await response.json();
+                
+                const projectsGrid = document.getElementById('projectsGrid');
+                projectsGrid.innerHTML = '';
+                
+                if (projects.length === 0) {
+                    projectsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #7f8c8d;">No projects available yet.</p>';
+                    return;
+                }
+                
+                projects.forEach(project => {
+                    const projectCard = document.createElement('div');
+                    projectCard.className = 'project-card';
+                    projectCard.innerHTML = `
+                        <img src="${project.image}" alt="${project.name}" class="project-image">
+                        <div class="project-content">
+                            <h3 class="project-name">${project.name}</h3>
+                            <p class="project-description">${project.description}</p>
+                            <button class="read-more-btn">Read More</button>
+                        </div>
+                    `;
+                    projectsGrid.appendChild(projectCard);
+                });
+            } catch (error) {
+                console.error('Error loading projects:', error);
+                document.getElementById('projectsGrid').innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #f44336;">Failed to load projects. Please check if the backend is running.</p>';
+            }
+        }
+
+        // Load Clients
+        async function loadClients() {
+            try {
+                const response = await fetch(`${API_URL}/clients`);
+                const clients = await response.json();
+                
+                const clientsGrid = document.getElementById('clientsGrid');
+                clientsGrid.innerHTML = '';
+                
+                if (clients.length === 0) {
+                    clientsGrid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #7f8c8d;">No client testimonials available yet.</p>';
+                    return;
+                }
+                
+                clients.forEach(client => {
+                    const clientCard = document.createElement('div');
+                    clientCard.className = 'client-card';
+                    clientCard.innerHTML = `
+                        <img src="${client.image}" alt="${client.name}" class="client-image">
+                        <p class="client-description">"${client.description}"</p>
+                        <h4 class="client-name">${client.name}</h4>
+                        <p class="client-designation">${client.designation}</p>
+                    `;
+                    clientsGrid.appendChild(clientCard);
+                });
+            } catch (error) {
+                console.error('Error loading clients:', error);
+                document.getElementById('clientsGrid').innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #f44336;">Failed to load clients. Please check if the backend is running.</p>';
+            }
+        }
+
+        // Handle Contact Form Submission
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                mobile: document.getElementById('mobile').value,
+                city: document.getElementById('city').value
+            };
+            
+            try {
+                const response = await fetch(`${API_URL}/contact`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (response.ok) {
+                    document.getElementById('contactSuccess').style.display = 'block';
+                    document.getElementById('contactError').style.display = 'none';
+                    document.getElementById('contactForm').reset();
+                    setTimeout(() => {
+                        document.getElementById('contactSuccess').style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Failed to submit');
+                }
+            } catch (error) {
+                console.error('Error submitting contact form:', error);
+                document.getElementById('contactError').style.display = 'block';
+                document.getElementById('contactSuccess').style.display = 'none';
+                setTimeout(() => {
+                    document.getElementById('contactError').style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Handle Newsletter Subscription
+        document.getElementById('newsletterForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('newsletterEmail').value;
+            
+            try {
+                const response = await fetch(`${API_URL}/newsletter`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+                
+                if (response.ok) {
+                    document.getElementById('newsletterSuccess').style.display = 'block';
+                    document.getElementById('newsletterError').style.display = 'none';
+                    document.getElementById('newsletterForm').reset();
+                    setTimeout(() => {
+                        document.getElementById('newsletterSuccess').style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Failed to subscribe');
+                }
+            } catch (error) {
+                console.error('Error subscribing to newsletter:', error);
+                document.getElementById('newsletterError').style.display = 'block';
+                document.getElementById('newsletterSuccess').style.display = 'none';
+                setTimeout(() => {
+                    document.getElementById('newsletterError').style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            loadProjects();
+            loadClients();
+        });
+    </script>
+</body>
+</html>
