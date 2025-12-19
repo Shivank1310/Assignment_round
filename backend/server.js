@@ -5,18 +5,28 @@ const multer = require('multer');
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+const uploadsDir = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(uploadsDir));
+
+// Serve Static Files
+app.use(express.static(path.join(__dirname, '../frontend')));
+app.use('/admin', express.static(path.join(__dirname, '../admin')));
+
+// Serve Admin Panel
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../admin/admin.html'));
+});
 
 // Create uploads directory if it doesn't exist
-if (!fs.existsSync('uploads')) {
-    fs.mkdirSync('uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
 }
 
 // MongoDB Connection
@@ -80,7 +90,7 @@ const Newsletter = mongoose.model('Newsletter', newsletterSchema);
 
 // ==================== IMAGE PROCESSING FUNCTION ====================
 async function processAndSaveImage(buffer, filename) {
-    const filepath = path.join('uploads', filename);
+    const filepath = path.join(uploadsDir, filename);
     
     // Crop image to 450x350 ratio (as per requirement)
     await sharp(buffer)
